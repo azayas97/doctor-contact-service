@@ -1,0 +1,25 @@
+
+    {
+      "request": {
+        "method": "GET",
+        "url": "/v1/doctors/get/1"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "success": true,
+          "code": 200,
+          "message": null,
+          "data": {
+            "id": "0",
+            "name": "Antonio",
+            "department": "Oncology",
+            "clinic": "Antonio's Clinic",
+            "phone": "+526625555555"
+          }
+        }
+      }
+    }

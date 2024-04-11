@@ -1,0 +1,130 @@
+type Query {
+    loginFormQuery: LoginForm
+    dashboardQuery(userId: String!): Dashboard
+    navigationQuery(userId: String!): NavigationBar
+    updateDoctorSideSheetQuery(doctorId: String!): DoctorSideSheet
+    createDoctorSideSheetQuery: DoctorSideSheet
+    deleteDoctorModalQuery: DeleteModal
+}
+
+type Mutation {
+    createDoctorMutation(request: CreateDoctorMutationRequest!): MutationResponse
+    updateDoctorMutation(request: UpdateDoctorMutationRequest!): MutationResponse
+    removeDoctorMutation(request: RemoveDoctorMutationRequest!): MutationResponse
+}
+
+type LoginForm {
+    header: String!
+    subHeader: String!
+    fields: LoginFormFields!
+}
+
+type LoginFormFields {
+    email: DCSField!
+    password: DCSField!
+    button: DCSButton!
+}
+
+type Dashboard {
+    header: String!
+    doctors: [DCSCard]
+    actionButton: DCSButton!
+}
+
+type DoctorSideSheet {
+    header: String!
+    subHeader: String
+    fields: DoctorSideSheetFields!
+    submit: DCSButton!
+}
+
+type DoctorSideSheetFields {
+    doctorName: DCSField!
+    department: DCSField!
+    clinic: DCSField!
+    phone: DCSField!
+}
+
+type NavigationBar {
+    mainLink: DCSLink!
+    logout: DCSLink!
+}
+
+type DeleteModal {
+    header: String!
+    subHeader: String
+    closeButton: Boolean!
+    primaryButton: DCSButton
+    secondaryButton: DCSButton
+}
+
+type MutationResponse {
+    resultCard: DCSResultCard!
+}
+
+input CreateDoctorMutationRequest {
+    name: String!
+    department: String!
+    clinic: String!
+    phone: String!
+}
+
+input UpdateDoctorMutationRequest {
+    id: String!
+    name: String
+    department: String
+    clinic: String
+    phone: String
+}
+
+input RemoveDoctorMutationRequest {
+    doctorId: String!
+}
+
+type DCSButton {
+    type: DCSButtonType!
+    disabled: Boolean!
+    message: String!
+}
+
+type DCSField {
+    id: String!
+    label: String!
+    placeholder: String
+    type: DCSFieldType!
+    disabled: Boolean!
+    value: String
+}
+
+type DCSCard {
+    id: String!
+    name: String!
+    workplace: String!
+    phoneNumber: String!
+    phoneNumberLabel: String!
+}
+
+type DCSLink {
+    text: String!
+    url: String!
+}
+
+type DCSResultCard {
+    type: DCSResultCardType!
+    text: String!
+}
+
+enum DCSResultCardType {
+    SUCCESS
+    ERROR
+}
+
+enum DCSFieldType {
+    TEXT
+    PASSWORD
+}
+
+enum DCSButtonType {
+    PRIMARY
+    SECONDARY
+}

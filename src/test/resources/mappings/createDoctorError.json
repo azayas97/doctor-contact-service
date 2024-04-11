@@ -1,0 +1,21 @@
+{
+  "scenarioName": "createDoctor",
+  "requiredScenarioState": "Started",
+  "newScenarioState": "OkayResponse",
+  "request": {
+    "method": "POST",
+    "url": "/v1/doctors/add"
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "success": false,
+      "code": 400,
+      "message": null,
+      "data": null
+    }
+  }
+}

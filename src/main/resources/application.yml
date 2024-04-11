@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: doctor-contact-service
+  graphql:
+    graphiql:
+      enabled: true
+
+webclient:
+  clients:
+    doctorContactApi:
+      url: "http://localhost:8000/api"
+      timeout: 3500

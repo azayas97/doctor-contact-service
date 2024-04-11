@@ -1,0 +1,21 @@
+{
+  "scenarioName": "updateDoctor",
+  "requiredScenarioState": "Started",
+  "newScenarioState": "OkayResponse",
+  "request": {
+    "method": "PUT",
+    "url": "/v1/doctors/edit"
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "success": false,
+      "code": 400,
+      "message": null,
+      "data": null
+    }
+  }
+}

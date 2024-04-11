@@ -1,0 +1,21 @@
+{
+  "scenarioName": "removeDoctor",
+  "requiredScenarioState": "Started",
+  "newScenarioState": "ErrorResponse",
+  "request": {
+    "method": "DELETE",
+    "url": "/v1/doctors/delete/1"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "success": false,
+      "code": 200,
+      "message": null,
+      "data": null
+    }
+  }
+}

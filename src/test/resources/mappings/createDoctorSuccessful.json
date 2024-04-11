@@ -1,0 +1,26 @@
+{
+  "scenarioName": "createDoctor",
+  "requiredScenarioState": "OkayResponse",
+  "request": {
+    "method": "POST",
+    "url": "/v1/doctors/add"
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "success": true,
+      "code": 201,
+      "message": null,
+      "data": {
+        "id": "0",
+        "name": "Antonio",
+        "department": "Oncology",
+        "clinic": "Antonio's Clinic",
+        "phone": "+526625555555"
+      }
+    }
+  }
+}

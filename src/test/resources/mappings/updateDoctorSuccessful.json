@@ -1,0 +1,26 @@
+{
+  "scenarioName": "updateDoctor",
+  "requiredScenarioState": "OkayResponse",
+  "request": {
+    "method": "PUT",
+    "url": "/v1/doctors/edit"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "success": false,
+      "code": 200,
+      "message": null,
+      "data": {
+        "id": "0",
+        "name": "Antonio",
+        "department": "Oncology",
+        "clinic": "Antonio's Clinic",
+        "phone": "+526625555555"
+      }
+    }
+  }
+}
