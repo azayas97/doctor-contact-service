@@ -1,5 +1,6 @@
 package io.zayasanton.app.config
 
+import io.zayasanton.app.api.filters.ExchangeFilter
 import io.zayasanton.app.util.WebClientFactory
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
@@ -32,6 +33,9 @@ class WebClientConfig(
             val webClient = WebClient.builder()
                 .baseUrl(webClientData.url)
                 .defaultHeader(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .apply {
+                    if (clientName == "doctorContactApi") it.filter(ExchangeFilter(webClientData.url))
+                }
                 .clientConnector(ReactorClientHttpConnector(client))
                 .build()
             webClients[clientName] = webClient

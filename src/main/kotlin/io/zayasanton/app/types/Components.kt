@@ -33,6 +33,13 @@ data class DCSResultCard(
     val text: String
 )
 
+data class DCSPopup(
+    val header: String,
+    val body: String,
+    val primary: DCSButton,
+    val secondary: DCSButton
+)
+
 enum class DCSResultCardType {
     SUCCESS,
     ERROR

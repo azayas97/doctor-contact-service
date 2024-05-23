@@ -1,0 +1,20 @@
+{
+  "scenarioName": "exchangeToken",
+  "requiredScenarioState": "SuccessfulResponse",
+  "request": {
+    "method": "POST",
+    "url": "/v1/auth/exchange"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "success": true,
+      "code": 200,
+      "message": null,
+      "data": "token"
+    }
+  }
+}

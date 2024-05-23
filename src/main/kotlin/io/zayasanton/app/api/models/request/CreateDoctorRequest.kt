@@ -1,10 +1,12 @@
 package io.zayasanton.app.api.models.request
 
 import graphql.GraphQLContext
+import io.zayasanton.app.types.Constants.SESSION_ID_KEY
 
 data class CreateDoctorRequest(
     val graphQLContext: GraphQLContext,
-    val data: CreateDoctorInput
+    val data: CreateDoctorInput,
+    val userId: String,
 )
 
 data class CreateDoctorInput(
@@ -14,4 +16,4 @@ data class CreateDoctorInput(
     val phone: String
 )
 
-fun CreateDoctorRequest.getAuthTokenHeader() = this.graphQLContext["token"] ?: ""
+fun CreateDoctorRequest.retrieveSessionId() = this.graphQLContext[SESSION_ID_KEY] ?: ""

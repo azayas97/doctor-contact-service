@@ -56,7 +56,8 @@ class DoctorMutationTest {
         runBlocking {
             val response = doctorMutation.createDoctorMutation(
                 getCreateDoctorMutationRequest(),
-                dataFetchingEnvironment
+                "1",
+                dataFetchingEnvironment,
             )
 
             Assertions.assertEquals(DCSResultCardType.SUCCESS, response.resultCard.type)
@@ -73,6 +74,7 @@ class DoctorMutationTest {
         runBlocking {
             val response = doctorMutation.createDoctorMutation(
                 getCreateDoctorMutationRequest(),
+                "1",
                 dataFetchingEnvironment
             )
 
@@ -90,6 +92,7 @@ class DoctorMutationTest {
         runBlocking {
             val response = doctorMutation.createDoctorMutation(
                 getCreateDoctorMutationRequest(),
+                "1",
                 dataFetchingEnvironment
             )
 
@@ -107,6 +110,7 @@ class DoctorMutationTest {
         runBlocking {
             val response = doctorMutation.updateDoctorMutation(
                 getUpdateDoctorMutationRequest(),
+                "1",
                 dataFetchingEnvironment
             )
 
@@ -124,6 +128,7 @@ class DoctorMutationTest {
         runBlocking {
             val response = doctorMutation.updateDoctorMutation(
                 getUpdateDoctorMutationRequest(),
+                "1",
                 dataFetchingEnvironment
             )
 
@@ -141,6 +146,7 @@ class DoctorMutationTest {
         runBlocking {
             val response = doctorMutation.updateDoctorMutation(
                 getUpdateDoctorMutationRequest(),
+                "1",
                 dataFetchingEnvironment
             )
 
@@ -158,6 +164,7 @@ class DoctorMutationTest {
         runBlocking {
             val response = doctorMutation.removeDoctorMutation(
                 getRemoveDoctorMutationRequest(),
+                "1",
                 dataFetchingEnvironment
             )
 
@@ -175,6 +182,7 @@ class DoctorMutationTest {
         runBlocking {
             val response = doctorMutation.removeDoctorMutation(
                 getRemoveDoctorMutationRequest(),
+                "1",
                 dataFetchingEnvironment
             )
 
@@ -192,6 +200,7 @@ class DoctorMutationTest {
         runBlocking {
             val response = doctorMutation.removeDoctorMutation(
                 getRemoveDoctorMutationRequest(),
+                "1",
                 dataFetchingEnvironment
             )
 

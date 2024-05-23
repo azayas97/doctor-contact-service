@@ -8,7 +8,9 @@ import io.zayasanton.app.types.DCSField
 import io.zayasanton.app.types.DCSFieldType
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.CrossOrigin
 
+@CrossOrigin(origins = ["http://localhost:3000"])
 @Controller
 class LoginFormQuery {
 
@@ -19,13 +21,13 @@ class LoginFormQuery {
             subHeader = "This is just a demo of the doctor contact repos from my Github profile",
             fields = LoginFormFields(
                 email = DCSField(
-                    id = "loginEmail",
+                    id = "email",
                     label = "Email",
                     placeholder = "example@email.com",
                     type = DCSFieldType.TEXT,
                 ),
                 password = DCSField(
-                    id = "loginPass",
+                    id = "password",
                     label = "Password",
                     type = DCSFieldType.PASSWORD
                 ),
