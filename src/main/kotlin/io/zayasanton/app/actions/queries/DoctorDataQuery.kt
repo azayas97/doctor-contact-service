@@ -6,6 +6,7 @@ import io.zayasanton.app.actions.models.response.DoctorSideSheet
 import io.zayasanton.app.actions.models.response.DoctorSideSheetFields
 import io.zayasanton.app.api.DoctorContactApi
 import io.zayasanton.app.api.models.request.GetDoctorByIDRequest
+import io.zayasanton.app.api.models.response.GetDoctorByIDResponse
 import io.zayasanton.app.types.DCSButton
 import io.zayasanton.app.types.DCSButtonType
 import io.zayasanton.app.types.DCSField
@@ -41,68 +42,44 @@ class DoctorDataQuery {
     }
 
     @QueryMapping
-    fun createDoctorSideSheetQuery(
-        dataFetchingEnvironment: DataFetchingEnvironment
-    ): DoctorSideSheet {
-        return DoctorSideSheet(
-            header = "Create doctor",
-            fields = DoctorSideSheetFields(
-                doctorName = DCSField(
-                    id = "doctorName",
-                    label = "Doctor's name",
-                    type = DCSFieldType.TEXT
-                ),
-                department = DCSField(
-                    id = "department",
-                    label = "Department",
-                    type = DCSFieldType.TEXT
-                ),
-                clinic = DCSField(
-                    id = "clinic",
-                    label = "Clinic",
-                    type = DCSFieldType.TEXT
-                ),
-                phone = DCSField(
-                    id = "phone",
-                    label = "Phone number",
-                    type = DCSFieldType.TEXT
-                )
-            ),
-            submit = DCSButton(
-                type = DCSButtonType.PRIMARY,
-                message = "Submit"
-            )
-        )
-    }
-
-    @QueryMapping
-    suspend fun updateDoctorSideSheetQuery(
-        @Argument doctorId: String,
+    suspend fun doctorSideSheetQuery(
+        @Argument doctorId: String?,
+        @Argument userId: String,
         dataFetchingEnvironment: DataFetchingEnvironment
     ): DoctorSideSheet {
 
         val graphQLContext = dataFetchingEnvironment.graphQlContext
 
         return try {
-            val response = doctorContactApi.getDoctorByID(
-                GetDoctorByIDRequest(
-                    graphQLContext = graphQLContext,
-                    doctorId = doctorId
+            var header = "Create doctor"
+            var response: GetDoctorByIDResponse? = null
+            var isDisabled = false
+            var subHeader: String? = null
+
+            if (doctorId != null) {
+                header =  "Update doctor"
+                response = doctorContactApi.getDoctorByID(
+                    GetDoctorByIDRequest(
+                        graphQLContext = graphQLContext,
+                        doctorId = doctorId,
+                        userId = userId
+                    )
                 )
-            )
-                .awaitFirst()
-                .takeIf {
-                    it.success
-                }
+                    .awaitFirst()
+                    .takeIf {
+                        it.success
+                    }
 
-            val subHeader = if (response == null)
-                "An error occurred and we couldn't fetch the doctor's data"
-            else null
+                subHeader = if (response == null)
+                    "An error occurred and we couldn't fetch the doctor's data"
+                else null
 
-            val isDisabled = !subHeader.isNullOrBlank()
+                isDisabled = !subHeader.isNullOrBlank()
+            }
+
 
             DoctorSideSheet(
-                header = "Update doctor",
+                header = header,
                 subHeader = subHeader,
                 fields = DoctorSideSheetFields(
                     doctorName = DCSField(

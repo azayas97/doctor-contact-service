@@ -101,7 +101,8 @@ class DoctorContactApiTest {
             val response = doctorContactApi.getDoctorByID(
                 GetDoctorByIDRequest(
                     graphQLContext = dataFetchingEnvironment.graphQlContext,
-                    doctorId = "1"
+                    doctorId = "1",
+                    userId = "1"
                 )
             ).awaitFirst()
 
@@ -114,7 +115,8 @@ class DoctorContactApiTest {
 
         val createDoctorRequest = CreateDoctorRequest(
             graphQLContext = dataFetchingEnvironment.graphQlContext,
-            data = getCreateDoctorInput()
+            data = getCreateDoctorInput(),
+            userId = "1"
         )
 
         runBlocking {
@@ -128,7 +130,8 @@ class DoctorContactApiTest {
     fun `createDoctor - throws DoctorContactAPIException`() {
         val createDoctorRequest = CreateDoctorRequest(
             graphQLContext = dataFetchingEnvironment.graphQlContext,
-            data = getCreateDoctorInput()
+            data = getCreateDoctorInput(),
+            userId = "1"
         )
 
         runBlocking {
@@ -142,7 +145,8 @@ class DoctorContactApiTest {
     fun `updateDoctor - returns successful response`() {
         val updateDoctorRequest = UpdateDoctorRequest(
             graphQLContext = dataFetchingEnvironment.graphQlContext,
-            data = getUpdateDoctorInput()
+            data = getUpdateDoctorInput(),
+            userId = "1"
         )
 
         runBlocking {
@@ -156,7 +160,8 @@ class DoctorContactApiTest {
     fun `updateDoctor - throws DoctorContactAPIException`() {
         val updateDoctorRequest = UpdateDoctorRequest(
             graphQLContext = dataFetchingEnvironment.graphQlContext,
-            data = getUpdateDoctorInput()
+            data = getUpdateDoctorInput(),
+            userId = "1"
         )
 
         runBlocking {
@@ -170,7 +175,8 @@ class DoctorContactApiTest {
     fun `removeDoctor - returns successful response`() {
         val removeDoctorRequest = RemoveDoctorRequest(
             graphQLContext = dataFetchingEnvironment.graphQlContext,
-            data = getRemoveDoctorInput()
+            data = getRemoveDoctorInput(),
+            userId = "1"
         )
 
         runBlocking {
@@ -184,7 +190,8 @@ class DoctorContactApiTest {
     fun `removeDoctor - throws DoctorContactAPIException`() {
         val removeDoctorRequest = RemoveDoctorRequest(
             graphQLContext = dataFetchingEnvironment.graphQlContext,
-            data = getRemoveDoctorInput()
+            data = getRemoveDoctorInput(),
+            userId = "1"
         )
 
         runBlocking {

@@ -30,6 +30,7 @@ class DoctorMutation {
     @MutationMapping
     suspend fun createDoctorMutation(
         @Argument request: CreateDoctorMutationRequest,
+        @Argument userId: String,
         dataFetchingEnvironment: DataFetchingEnvironment
     ): MutationResponse {
 
@@ -44,7 +45,8 @@ class DoctorMutation {
                         dpt = request.department,
                         clinic = request.clinic,
                         phone = request.phone
-                    )
+                    ),
+                    userId = userId
                 )
             ).awaitFirst()
 
@@ -68,6 +70,7 @@ class DoctorMutation {
     @MutationMapping
     suspend fun updateDoctorMutation(
         @Argument request: UpdateDoctorMutationRequest,
+        @Argument userId: String,
         dataFetchingEnvironment: DataFetchingEnvironment
     ): MutationResponse {
 
@@ -83,7 +86,8 @@ class DoctorMutation {
                         dpt = request.department,
                         clinic = request.clinic,
                         phone = request.phone
-                    )
+                    ),
+                    userId = userId
                 )
             ).awaitFirst()
 
@@ -107,6 +111,7 @@ class DoctorMutation {
     @MutationMapping
     suspend fun removeDoctorMutation(
         @Argument request: RemoveDoctorMutationRequest,
+        @Argument userId: String,
         dataFetchingEnvironment: DataFetchingEnvironment
     ): MutationResponse {
 
@@ -118,7 +123,8 @@ class DoctorMutation {
                     graphQLContext = graphQLContext,
                     data = RemoveDoctorInput(
                         doctorId = request.doctorId
-                    )
+                    ),
+                    userId = userId
                 )
             ).awaitFirst()
 

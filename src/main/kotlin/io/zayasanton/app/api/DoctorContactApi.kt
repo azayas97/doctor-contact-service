@@ -5,16 +5,16 @@ import io.zayasanton.app.api.models.request.GetDoctorByIDRequest
 import io.zayasanton.app.api.models.request.GetDoctorsRequest
 import io.zayasanton.app.api.models.request.UpdateDoctorRequest
 import io.zayasanton.app.api.models.request.RemoveDoctorRequest
-import io.zayasanton.app.api.models.request.getAuthTokenHeader
+import io.zayasanton.app.api.models.request.retrieveSessionId
 import io.zayasanton.app.api.models.response.CreateDoctorResponse
 import io.zayasanton.app.api.models.response.GetDoctorByIDResponse
 import io.zayasanton.app.api.models.response.GetDoctorsResponse
 import io.zayasanton.app.api.models.response.UpdateDoctorResponse
-import io.zayasanton.app.types.Constants.AUTH_HEADER_VALUE
+import io.zayasanton.app.types.Constants.SESSION_ID_KEY
+import io.zayasanton.app.types.Constants.USER_ID_KEY
 import io.zayasanton.app.types.DoctorContactAPIException
 import io.zayasanton.app.util.WebClientFactory
 import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
@@ -32,7 +32,10 @@ class DoctorContactApi(
                 it.path("/v1/doctors/{userId}")
                 it.build(request.userId)
             }
-            .header(AUTH_HEADER_VALUE, request.getAuthTokenHeader())
+            .headers {
+                it.set(SESSION_ID_KEY, request.retrieveSessionId())
+                it.set(USER_ID_KEY, request.userId)
+            }
             .retrieve()
             .bodyToFlux(GetDoctorsResponse::class.java)
     }
@@ -43,7 +46,10 @@ class DoctorContactApi(
                 it.path("/v1/doctors/get/{doctorId}")
                 it.build(request.doctorId)
             }
-            .header(AUTH_HEADER_VALUE, request.getAuthTokenHeader())
+            .headers {
+                it.set(SESSION_ID_KEY, request.retrieveSessionId())
+                it.set(USER_ID_KEY, request.userId)
+            }
             .retrieve()
             .bodyToFlux(GetDoctorByIDResponse::class.java)
     }
@@ -51,7 +57,10 @@ class DoctorContactApi(
     suspend fun createDoctor(request: CreateDoctorRequest): Flux<CreateDoctorResponse> {
         return webClient.post()
             .uri("/v1/doctors/add")
-            .header(AUTH_HEADER_VALUE, request.getAuthTokenHeader())
+            .headers {
+                it.set(SESSION_ID_KEY, request.retrieveSessionId())
+                it.set(USER_ID_KEY, request.userId)
+            }
             .body(
                 BodyInserters.fromValue(
                     request.data
@@ -68,7 +77,10 @@ class DoctorContactApi(
     suspend fun updateDoctor(request: UpdateDoctorRequest): Flux<UpdateDoctorResponse> {
         return webClient.put()
             .uri("/v1/doctors/edit")
-            .header(AUTH_HEADER_VALUE, request.getAuthTokenHeader())
+            .headers {
+                it.set(SESSION_ID_KEY, request.retrieveSessionId())
+                it.set(USER_ID_KEY, request.userId)
+            }
             .body(
                 BodyInserters.fromValue(
                     request.data
@@ -90,7 +102,10 @@ class DoctorContactApi(
                 it.path("/v1/doctors/delete/{doctorId}")
                 it.build(doctorId)
             }
-            .header(AUTH_HEADER_VALUE, request.getAuthTokenHeader())
+            .headers {
+                it.set(SESSION_ID_KEY, request.retrieveSessionId())
+                it.set(USER_ID_KEY, request.userId)
+            }
             .exchangeToFlux {
                 when (it.statusCode()) {
                     HttpStatus.OK -> it.bodyToFlux(UpdateDoctorResponse::class.java)

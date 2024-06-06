@@ -41,7 +41,7 @@ class DoctorDataQueryTest {
         } returns Flux.just(getDoctorByIDResponse())
 
         runBlocking {
-            val response = doctorDataQuery.updateDoctorSideSheetQuery("123", dataFetchingEnvironment)
+            val response = doctorDataQuery.doctorSideSheetQuery("123", "1", dataFetchingEnvironment)
 
             Assertions.assertEquals("Update doctor", response.header)
             Assertions.assertNull(response.subHeader)
@@ -60,7 +60,7 @@ class DoctorDataQueryTest {
         } returns Flux.just(getDoctorByIDFailedResponse())
 
         runBlocking {
-            val response = doctorDataQuery.updateDoctorSideSheetQuery("123", dataFetchingEnvironment)
+            val response = doctorDataQuery.doctorSideSheetQuery("123", "1", dataFetchingEnvironment)
 
             Assertions.assertEquals("Update doctor", response.header)
             Assertions.assertNotNull(response.subHeader)
@@ -79,7 +79,7 @@ class DoctorDataQueryTest {
         } throws Exception()
 
         runBlocking {
-            val response = doctorDataQuery.updateDoctorSideSheetQuery("123", dataFetchingEnvironment)
+            val response = doctorDataQuery.doctorSideSheetQuery("123", "1", dataFetchingEnvironment)
 
             Assertions.assertEquals("Update doctor", response.header)
             Assertions.assertEquals(
@@ -97,7 +97,7 @@ class DoctorDataQueryTest {
     @Test
     fun `createDoctorSideSheetQuery - returns sidesheet successfully`() {
         runBlocking {
-            val response = doctorDataQuery.createDoctorSideSheetQuery(dataFetchingEnvironment)
+            val response = doctorDataQuery.doctorSideSheetQuery(null, "1", dataFetchingEnvironment)
 
             Assertions.assertEquals("Create doctor", response.header)
             Assertions.assertNull(response.subHeader)

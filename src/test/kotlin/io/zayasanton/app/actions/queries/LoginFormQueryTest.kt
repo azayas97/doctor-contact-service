@@ -24,9 +24,9 @@ class LoginFormQueryTest {
         val response = loginFormQuery.loginFormQuery()
 
         Assertions.assertEquals("Welcome to Doctor Contact Playground!", response.header)
-        Assertions.assertEquals("loginEmail", response.fields.email.id)
+        Assertions.assertEquals("email", response.fields.email.id)
         Assertions.assertFalse(response.fields.email.disabled)
-        Assertions.assertEquals("loginPass", response.fields.password.id)
+        Assertions.assertEquals("password", response.fields.password.id)
         Assertions.assertFalse(response.fields.password.disabled)
         Assertions.assertEquals(DCSButtonType.PRIMARY, response.fields.button.type)
     }

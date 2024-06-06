@@ -7,6 +7,7 @@ import io.zayasanton.app.api.models.request.GetDoctorsRequest
 import io.zayasanton.app.types.DCSButton
 import io.zayasanton.app.types.DCSButtonType
 import io.zayasanton.app.types.DCSCard
+import io.zayasanton.app.types.DCSPopup
 import kotlinx.coroutines.reactive.awaitFirst
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.graphql.data.method.annotation.Argument
@@ -43,6 +44,20 @@ class DashboardQuery {
                         type = DCSButtonType.PRIMARY,
                         message = "Add new doctor",
                         disabled = true
+                    ),
+                    removePopup = DCSPopup(
+                        header = "",
+                        body = "",
+                        primary = DCSButton(
+                            type = DCSButtonType.PRIMARY,
+                            message = "",
+                            disabled = false
+                        ),
+                        secondary = DCSButton(
+                            type = DCSButtonType.SECONDARY,
+                            message = "",
+                            disabled = false
+                        )
                     )
                 )
 
@@ -62,6 +77,20 @@ class DashboardQuery {
                 actionButton = DCSButton(
                     type = DCSButtonType.PRIMARY,
                     message = "Add new doctor"
+                ),
+                removePopup = DCSPopup(
+                    header = "Delete doctor",
+                    body = "Are you sure you want to delete this doctor?",
+                    primary = DCSButton(
+                        type = DCSButtonType.PRIMARY,
+                        message = "Delete",
+                        disabled = false
+                    ),
+                    secondary = DCSButton(
+                        type = DCSButtonType.SECONDARY,
+                        message = "Cancel",
+                        disabled = false
+                    )
                 )
             )
         } catch (err: Exception) {
@@ -73,6 +102,20 @@ class DashboardQuery {
                     type = DCSButtonType.PRIMARY,
                     message = "Add new doctor",
                     disabled = true
+                ),
+                removePopup = DCSPopup(
+                    header = "",
+                    body = "",
+                    primary = DCSButton(
+                        type = DCSButtonType.PRIMARY,
+                        message = "",
+                        disabled = false
+                    ),
+                    secondary = DCSButton(
+                        type = DCSButtonType.SECONDARY,
+                        message = "",
+                        disabled = false
+                    )
                 )
             )
         }

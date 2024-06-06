@@ -2,15 +2,14 @@ type Query {
     loginFormQuery: LoginForm
     dashboardQuery(userId: String!): Dashboard
     navigationQuery(userId: String!): NavigationBar
-    updateDoctorSideSheetQuery(doctorId: String!): DoctorSideSheet
-    createDoctorSideSheetQuery: DoctorSideSheet
+    doctorSideSheetQuery(doctorId: String, userId: String!): DoctorSideSheet
     deleteDoctorModalQuery: DeleteModal
 }
 
 type Mutation {
-    createDoctorMutation(request: CreateDoctorMutationRequest!): MutationResponse
-    updateDoctorMutation(request: UpdateDoctorMutationRequest!): MutationResponse
-    removeDoctorMutation(request: RemoveDoctorMutationRequest!): MutationResponse
+    createDoctorMutation(request: CreateDoctorMutationRequest!, userId: String!): MutationResponse
+    updateDoctorMutation(request: UpdateDoctorMutationRequest!, userId: String!): MutationResponse
+    removeDoctorMutation(request: RemoveDoctorMutationRequest!, userId: String!): MutationResponse
 }
 
 type LoginForm {
@@ -27,8 +26,9 @@ type LoginFormFields {
 
 type Dashboard {
     header: String!
-    doctors: [DCSCard]
+    doctors: [DCSCard!]!
     actionButton: DCSButton!
+    removePopup: DCSPopup!
 }
 
 type DoctorSideSheet {
@@ -85,6 +85,13 @@ type DCSButton {
     type: DCSButtonType!
     disabled: Boolean!
     message: String!
+}
+
+type DCSPopup {
+    header: String!
+    body: String!
+    primary: DCSButton!
+    secondary: DCSButton!
 }
 
 type DCSField {
